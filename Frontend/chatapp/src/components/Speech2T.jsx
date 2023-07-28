@@ -60,3 +60,8 @@ const Speech2Text = () => {
 };
 
 export default Speech2Text;
+
+
+//this needs to be in stream , learn it now !! god 
+// this also needs to be in redux or something discuss 
+// is this sufficient  
