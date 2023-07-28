@@ -40,3 +40,6 @@ const Text2Speech = () => {
 };
 
 export default Text2Speech;
+
+
+// out of whisper ai , react lib, this is better for us , basic web based api inbuilt   
