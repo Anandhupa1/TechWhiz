@@ -3,13 +3,12 @@ const { openai } = require("../configs/openai");
 const IndexRouter = require("express").Router();
 
 
-
-
 IndexRouter.get("/",async(req,res)=>{
     try {
         try {
 
 
+      
                       const chatCompletion = await openai.createChatCompletion({
                         model: "gpt-3.5-turbo",
                         messages: [
