@@ -1,0 +1,6 @@
+1.  speech to text 
+- read tokens 
+- completion endpoints 
+- prompt to get any response based on probable text
+-temperature 0 - deterministic  1- non deterministic output  
+- Begin the basic setup 
