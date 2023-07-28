@@ -49,8 +49,9 @@ const Speech2Text = () => {
   }, []);
 
   return (
+    //this must go in the front end below layout ! 
     <div>
-      <h1>Speech-to-Text Example</h1>
+      <h1>Speech-to-Text For Interview</h1>
       <button onClick={() => setIsListening(!isListening)}>
         {isListening ? 'Stop Listening' : 'Start Listening'}
       </button>
