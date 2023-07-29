@@ -1,21 +1,21 @@
 
-import styled from "styled-components"
-import TextBox from "../components/TextBox";
-import QuestionBox from "../components/QuestionBox";
-import Avatar from "../components/Avatar";
+import styled from "styled-components";
+import QuestionBox from "../QuestionBox";
+import Avatar from "../Avatar";
+import TextBox from "../TextBox";
 
 
 const InterviewPlateform = () => {
   return (
-    <DIV>
+    <div>
 
     <div className="container">
     <Avatar/>
     <QuestionBox/>
-     <TextBox/>
+    <TextBox/>
     </div>
 
-    </DIV>
+    </div>
   )
 }
 
