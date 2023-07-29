@@ -5,16 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter,RouterProvider, } from "react-router-dom";
 import Interview from './components/pages/Interview';
+import Landing from './components/pages/Landing';
+import Dashboard from './components/pages/Dashboard';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <Landing/>,
     // errorElement:<Error/>
   },
   {
     path: "/interview",
     element: <Interview/>,
+    // errorElement:<Error/>
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard/>,
     // errorElement:<Error/>
   },
  
