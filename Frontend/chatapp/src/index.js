@@ -7,6 +7,7 @@ import { createBrowserRouter,RouterProvider, } from "react-router-dom";
 import Interview from './components/pages/Interview';
 import Landing from './components/pages/Landing';
 import Dashboard from './components/pages/Dashboard';
+import InterviewPlateform from './components/pages/InterviewPlateform';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/interview",
-    element: <Interview/>,
+    element: <InterviewPlateform/>,
     // errorElement:<Error/>
   },
   {
