@@ -7,7 +7,7 @@ import TextBox from "../TextBox";
 
 const InterviewPlateform = () => {
   return (
-    <div>
+    <DIV>
 
     <div className="container">
     <Avatar/>
@@ -15,7 +15,7 @@ const InterviewPlateform = () => {
     <TextBox/>
     </div>
 
-    </div>
+    </DIV>
   )
 }
 
@@ -25,18 +25,11 @@ const DIV=styled.div`
 //#010750,#490d61
 .container{
     width:100%;
-    background: linear-gradient(45deg,#00695C,#010750);
     min-height: 100vh;
     display:flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: 20px;
     flex-direction: column;
 }
 
 `
-
-
-
-
-
 

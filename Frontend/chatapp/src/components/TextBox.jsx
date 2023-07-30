@@ -18,7 +18,7 @@ const TextBox = () => {
     
     const stopSpeaking=SpeechRecognition.stopListening;
 
-    const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition({ })
+    const { transcript, browserSupportsSpeechRecognition,resetTranscript, } = useSpeechRecognition({ })
 
     if(!browserSupportsSpeechRecognition) {
         return null
@@ -26,10 +26,14 @@ const TextBox = () => {
 
     const handleSubmit=()=>{
       if(toggle){
-        setAnswer("")
+        setAnswer("");
+        console.log(answer);
       }else{
-        setText("")
+        setText("");
+        console.log(transcript);
       }
+
+      resetTranscript();
       setToggle(true)
     } 
      
@@ -45,7 +49,6 @@ const TextBox = () => {
     const speech=
     <textarea className="speech" placeholder="Type your answer...." spellCheck="false" onChange={(e)=>setText(e.target.value)} value={transcript}/>
 
-    console.log(speech)
   return (
 
     <DIV>
@@ -76,10 +79,10 @@ export default TextBox;
 const DIV=styled.div`
 
 textarea{
-    width:800px;
+    width:65%;
     height:175px;
-    background: #403d84;
-    color:#fff;
+    background:#E0E0E0;
+    color:#131418;
     font-size: 18px;
     border:0;
     outline:0;
@@ -92,7 +95,7 @@ textarea{
 
 textarea::placeholder{
     font-size: 16px;
-    color:#C5CAE9;
+    color:#90A4AE;
 }
 
 .speak{

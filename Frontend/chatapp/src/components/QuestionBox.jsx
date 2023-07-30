@@ -1,5 +1,4 @@
 
-
 import styled from "styled-components"
 
 const QuestionBox = () => {
@@ -16,10 +15,10 @@ export default QuestionBox;
 const DIV=styled.div`
 
 textarea{
-    width:800px;
+    width:65%;
     height:215px;
-    background: #403d84;
-    color:#fff;
+    background: #E0E0E0;
+    color:#131418;
     font-size: 22px;
     border:0;
     outline:0;
@@ -32,7 +31,7 @@ textarea{
 
 textarea::placeholder{
     font-size: 16px;
-    color:#C5CAE9;
+    color:#90A4AE;
 }
 
 

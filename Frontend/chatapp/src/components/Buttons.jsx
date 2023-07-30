@@ -43,9 +43,6 @@ const Buttons = ({answer,getText}) => {
     <span className="stopSpeakText">Stop Speaking</span>
    </button>
 
-
-
-
    <button className="submit" onClick={handleSubmit}>Submit</button>
 
     </DIV>
