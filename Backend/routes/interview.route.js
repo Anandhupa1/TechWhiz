@@ -11,7 +11,7 @@ InterviewRoute.get("/all",async(req,res)=>{
 })
 
 //chatCompletion
-InterviewRoute.get("/",async(req,res)=>{
+InterviewRoute.post("/chat",async(req,res)=>{
     try {
     let interviewId = req.body.interviewId;
     let msgs = req.body.messages;
@@ -21,7 +21,7 @@ InterviewRoute.get("/",async(req,res)=>{
       let currentInterview = await InterviewModel.findById(interviewId);
       if(!currentInterview){res.status(401).json({message:"No interview exists with the given id"})}
       else{
-        console.log(currentInterview.status,currentInterview.level,currentInterview.questions)
+        console.log(currentInterview.subject,currentInterview.level,currentInterview.questions)
         let initialMsg = starterTemplate(currentInterview._id,currentInterview.level,currentInterview.questions)
         console.log([ ...initialMsg, ...req.body.messages ] )
         console.log("______________________________________________________________")
@@ -31,12 +31,12 @@ InterviewRoute.get("/",async(req,res)=>{
           });
           
         
-            let output = JSON.parse(chatCompletion.data.choices[0].message.content);
-            // store data in database____________________________________________________________
+          //   let output = chatCompletion.data.choices[0].message.content;
+          //   // store data in database____________________________________________________________
 
 
-           currentInterview.results.push(output);
-           let dbv= await currentInterview.save();
+          //  currentInterview.results.push(output);
+          //  let dbv= await currentInterview.save();
 
 
 
@@ -47,12 +47,23 @@ InterviewRoute.get("/",async(req,res)=>{
 
 
             //sending output___________________________________________________________________________
-            res.send({
-              rowReply  :chatCompletion.data.choices[0].message,
-              result : output,
-              storedValue:dbv,
-            })
-       
+            // res.send({
+            //   rowReply  :chatCompletion.data.choices[0].message,
+            //   result : output,
+            //   storedValue:dbv,
+            // })
+
+
+
+
+
+
+
+
+
+
+
+        res.send(chatCompletion.data.choices[0].message)
           
           
       }
@@ -70,13 +81,15 @@ console.log(error)
 InterviewRoute.post("/",async(req,res)=>{
     try {
     let {userId, subject} = req.body;
+   
     
     if(!userId ){res.status(422).json({message:"provide the userId of the interviewee"})}
     else if(!subject ){res.status(422).json({message:"please select a subject to continue"})}
     else {
         let nI = new InterviewModel({
             userId : req.body.userId,
-            subject:req.body.subject
+            subject:req.body.subject,
+            level :req.body.level,
         })
         
         let out = await nI.save();
@@ -96,7 +109,7 @@ module.exports={InterviewRoute}
 
 
 
-function starterTemplate(subject="react",level="medium",noOfQuestions=5,name="you"){
+function starterTemplate(subject,level,noOfQuestion,name){
   let jobRole;
   let concepts;
   if(subject =="node"){jobRole="Node.js developer";concepts="express,mongodb,caching,web sockets"}
@@ -104,24 +117,19 @@ function starterTemplate(subject="react",level="medium",noOfQuestions=5,name="yo
   else if(subject=="java"){jobRole="java developer";concepts="basics of java programing"}
   else { jobRole="React.js developer";concepts= "redux ,react ,javascript ,react hooks"}
 
-let str = `You want you to act as an expert ${jobRole}. You are asked to take my technical interview for the position of backend software developer and share your feedback. 
-In my new job I will be building web apps which will require for me to have knowledge of the concepts ${concepts}. When I ask you to start taking interview, then #### start asking questions without giving answer which shall compulsory be based on the knowledge required for this position.
-you can call me ${name} only, don't use any other ways.
+let str = `You want you to act as an expert java developer. You are asked to take my technical interview for the position of backend software developer and share your feedback. In my new job I will be building web apps which will require for me to have knowledge of the concepts basics of java programing. When I ask you to start taking interview, then #### start asking questions without giving answer which shall compulsory be based on the knowledge required for this position.
+only ask medium level questions 
+I will say the phrase “start interview” , then start giving questions. 
+Ask one question at a time ,wait for my answer,then analyse my answer and give me feedback , when I answered the question  analyse my answer, then give me a result in the form of Object datastructure in javascript.
+I will specify the keys and values below. But dont give any other information , dont include any words, only an object datastructure with specified keys can be send to me as the feedback of my answer.
+then I will say the phrase "next question", then you need to go to next question.
 
-only ask ${level} level questions 
-I will say the phrase “start” for you to start. 
-Ask one question at a time  , when I answered the question  analyse my answer, then give me feedback
-
-For each and every answer response with an object datastructure in javascript. I will specify the keys and values below. But dont give any other information , dont include any words, only an object datastructure with specified keys.
-
-if i am not able to answer the question then also give a result with the follwing category, don't move to next question directly.
+if i am not able to answer the question then also give a result in the form of object, don't move to next question directly.
 in the result object put your feedback as the value with the key feedback, 
-
 
 create a key feedback in object , The feedback will evaluate the content,technical knowledge, delivery of answer, also It will highlight the student strengths and suggest areas for improvement, such as communication skills, technical knowledge,
 feedback will have maximum 400 words only and minimum 100 words.
 put this feedback as the value of the key feedback in the result object.
-
 
 rate the communication skills of the given answer and give a rating between 1 to 10, 
 create a key communication in object and put this rating as value of that key
@@ -146,14 +154,13 @@ only After i said the phrase "stop interview" , provide a feedback for my overal
 3. strengths and weakness
 
 
-you dont provide any additional information , you are only allowed to ask questions only response with object datastructure in javascript, no other communication is needed
-also please dont implement anything  other than what I mentioned above. 
+you dont provide any additional information , you are only allowed to ask questions and only response with object datastructure in javascript, no other communication is needed
+also please don't implement anything  other than what I mentioned above. 
 I want the output in JSON format only . you can give a stringified version of JSON data.
 
 Please don't provide feedback right away, after I gives the answer then give me feedback.
 please ask questions one by one , only one question at a response , then allow me to give an answer to that question , then give me feedback only after that you need to move into next question.
 
- Please say “ Can we start interview ” if you understood my instructions.
 
 `
 

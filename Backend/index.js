@@ -5,6 +5,7 @@ const { openai } = require("./configs/openai");
 const { IndexRouter } = require("./routes/index.router");
 const cors = require("cors");
 const { InterviewRoute } = require("./routes/interview.route");
+const { questionRouter } = require("./routes/questions");
 const app = express();
 require("dotenv").config();
 
@@ -15,7 +16,7 @@ app.use(cors())
 
 app.use("/",IndexRouter);
 app.use("/interview",InterviewRoute);
-
+app.use("/q",questionRouter);
 
 
 app.listen(8000,async()=>{
